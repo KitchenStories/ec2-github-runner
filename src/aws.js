@@ -45,12 +45,13 @@ async function startEc2Instance(label, githubRegistrationToken) {
     TagSpecifications: config.tagSpecifications,
   };
 
-  if (config.input.isSpot) {
+  if (config.input.spot) {
+    console.log('Requesting a spot instance...');
     params.InstanceMarketOptions = {
-      MarketType: 'spot'
-    };
-    params.SpotOptions = {
-      SpotInstanceType: 'one-time'
+      MarketType: 'spot',
+      SpotOptions: {
+        SpotInstanceType: 'one-time'
+      }
     };
   }
 
