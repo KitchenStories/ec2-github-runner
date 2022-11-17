@@ -45,6 +45,15 @@ async function startEc2Instance(label, githubRegistrationToken) {
     TagSpecifications: config.tagSpecifications,
   };
 
+  if (config.isSpot) {
+    params.InstanceMarketOptions = {
+      MarketType: 'spot'
+    };
+    params.SpotOptions = {
+      SpotInstanceType: 'one-time'
+    };
+  }
+
   try {
     const result = await ec2.runInstances(params).promise();
     const ec2InstanceId = result.Instances[0].InstanceId;
