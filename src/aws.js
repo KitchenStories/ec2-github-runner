@@ -45,7 +45,7 @@ async function startEc2Instance(label, githubRegistrationToken) {
     TagSpecifications: config.tagSpecifications,
   };
 
-  if (config.isSpot) {
+  if (config.input.isSpot) {
     params.InstanceMarketOptions = {
       MarketType: 'spot'
     };
